@@ -1,34 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	// Maps in golang
-	firstMap := make(map[string]uint)
-	fmt.Printf("Value = %v, Length = %d\n", firstMap, len(firstMap))
-	firstMap["Gabriel"] = 24
-	fmt.Printf("Value = %v, Length = %d\n", firstMap, len(firstMap))
+	myString := "sumário"
+	fmt.Println(len(myString))
+	fmt.Printf("%v, %T\n", myString, myString)
 
-	secondMap := map[string]uint{"Gabriel": 24, "Melinda": 22}
-	fmt.Printf("Value = %v\n", secondMap)
-
-	age, ok := secondMap["Melindas"]
-	if !ok {
-		fmt.Printf("Name Melinda is not in the map\n")
-	} else {
-		fmt.Printf("Age of Melinda is %v\n", age)
+	for i, v := range myString {
+		fmt.Printf("%d, %v\n", i, v)
 	}
 
-	// Looping
-
-	// looping over a map ( the order is not preserved when looping over maps )
-	for name, age := range secondMap {
-		fmt.Printf("Name = %v, Age = %d\n", name, age)
+	anotherString := []rune("sumário")
+	for i, v := range anotherString {
+		fmt.Printf("%v, %v\n", i, v)
 	}
 
-	// looping over an array or slice
-	nameSlice := []string{"Gabriel", "Rockson", "Melinda", "Ampah", "Korsah"}
-	for i, v := range nameSlice {
-		fmt.Printf("Index = %d, Name = %v\n", i, v)
+	// building a string
+
+	// this is an inefficient way to do it
+	myNameChars := []string{"G", "a", "b", "r", "i", "e", "l"}
+	nameString := ""
+	for i := range myNameChars {
+		nameString += myNameChars[i]
 	}
+
+	fmt.Println(nameString)
+
+	// this is an efficient way to do it
+	anotherNameSlice := []string{"M", "e", "l", "i", "n", "d", "a"}
+	var stringBuilder strings.Builder
+	for i := range anotherNameSlice {
+		stringBuilder.WriteString(anotherNameSlice[i])
+	}
+	name := stringBuilder.String()
+	fmt.Println(name)
 }
