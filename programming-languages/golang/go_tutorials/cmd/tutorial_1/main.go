@@ -1,20 +1,45 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
-	var intNum int
-	fmt.Println(intNum)
+	var myValue string = "Hello, World! I am coding in Golang"
+	printMe(myValue)
 
-	var floatNum float64
-	fmt.Println(floatNum)
+	var numerator int = 11
+	var denominator int = 5
 
-	var String string
-	fmt.Println(String)
+	result, remainder, err := intDivision(numerator, denominator)
+	if err != nil {
+		fmt.Printf(err.Error())
+	} else {
+		fmt.Printf("Remainder = %d, Result = %d\n", remainder, result)
+	}
 
-	var1, var2 := 1, 2
-	fmt.Println(var1, var2)
+	switch remainder {
+	case 0:
+		fmt.Println("The division was exact")
+	case 1, 2:
+		fmt.Println("There was just 1 or 2 overflow")
+	default:
+		fmt.Println("There was a lot of overflow")
+	}
+}
 
-	const myConst string = "const value"
-	fmt.Println(myConst)
+func printMe(printVal string) {
+	fmt.Println(printVal)
+}
+
+func intDivision(numerator int, denominator int) (int, int, error) {
+	if denominator == 0 {
+		return 0, 0, errors.New("Denominator cannot be 0")
+	}
+
+	var result int = numerator / denominator
+	var remainder int = numerator % denominator
+
+	return result, remainder, nil
 }
