@@ -1,45 +1,41 @@
 package main
 
-import (
-	"errors"
-	"fmt"
-)
+import "fmt"
 
 func main() {
-	var myValue string = "Hello, World! I am coding in Golang"
-	printMe(myValue)
+	intArray := [...]int{1, 2, 3}
+	fmt.Println(intArray)
 
-	var numerator int = 11
-	var denominator int = 5
+	intSlice1 := []int{1, 2, 3}
+	fmt.Printf(
+		"Value = %v, Length = %d, Capacity = %d\n",
+		intSlice1,
+		len(intSlice1),
+		cap(intSlice1),
+	)
+	intSlice1 = append(intSlice1, 9)
+	fmt.Printf(
+		"Value = %v, Length = %d, Capacity = %d\n",
+		intSlice1,
+		len(intSlice1),
+		cap(intSlice1),
+	)
 
-	result, remainder, err := intDivision(numerator, denominator)
-	if err != nil {
-		fmt.Printf(err.Error())
-	} else {
-		fmt.Printf("Remainder = %d, Result = %d\n", remainder, result)
-	}
+	intSlice2 := []int{12, 13, 15}
 
-	switch remainder {
-	case 0:
-		fmt.Println("The division was exact")
-	case 1, 2:
-		fmt.Println("There was just 1 or 2 overflow")
-	default:
-		fmt.Println("There was a lot of overflow")
-	}
-}
+	intSlice1 = append(intSlice1, intSlice2...)
+	fmt.Printf(
+		"Value = %v, Length = %d, Capacity = %d\n",
+		intSlice1,
+		len(intSlice1),
+		cap(intSlice1),
+	)
 
-func printMe(printVal string) {
-	fmt.Println(printVal)
-}
-
-func intDivision(numerator int, denominator int) (int, int, error) {
-	if denominator == 0 {
-		return 0, 0, errors.New("Denominator cannot be 0")
-	}
-
-	var result int = numerator / denominator
-	var remainder int = numerator % denominator
-
-	return result, remainder, nil
+	intSlice3 := make([]int, 0, 50)
+	fmt.Printf(
+		"Value = %v, Length = %d, Capacity = %d\n",
+		intSlice3,
+		len(intSlice3),
+		cap(intSlice3),
+	)
 }
